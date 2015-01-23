@@ -1,0 +1,26 @@
+{
+  "name": "trek-love",
+  "version": "0.0.1",
+  "description": "Trek Lovers site",
+  "main": "index.html",
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node",
+    "yui"
+  ],
+  "authors": [
+    "Christopher Plummer"
+  ],
+  "license": "MIT",
+  "homepage": "signalintrusion.com",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
