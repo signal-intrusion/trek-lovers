@@ -1,5 +1,9 @@
 *.css
 *.swp
 *.swo
+*.swn
 node_modules/
 bower_components/
+sass/bourbon
+sass/neat
+.sass-cache/**

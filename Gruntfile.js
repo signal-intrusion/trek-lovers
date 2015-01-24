@@ -23,7 +23,7 @@ module.exports = function(grunt) {
           lineNumbers: true
         },
         files: {
-          'new-styles.css': 'sass/new-styles.sass'
+          'new-styles.css': 'sass/new-styles.sass',
           'styles.css': 'sass/styles.sass'
         }
       }
