@@ -7,3 +7,6 @@ bower_components/
 sass/bourbon
 sass/neat
 .sass-cache/**
+boubon/
+neat/
+*.scss
