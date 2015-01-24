@@ -10,3 +10,4 @@ sass/neat
 boubon/
 neat/
 *.scss
+!styleguide.css
