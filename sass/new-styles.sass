@@ -2,12 +2,20 @@
 
 /** * YUI 3.5.0 - reset.css (http://developer.yahoo.com/yui/3/cssreset/) * http://cssreset.com * Copyright 2012 Yahoo! Inc. All rights reserved. * http://yuilibrary.com/license/ *//*TODO will need to remove setting  s on HTML since we can't namespace it.TODO with the prefix, should I g  roup by selector or property for weight savings?*/html{color:#000;bac   kground:#FFF;}/*TODO remove settings on BODY since we can't namespace   it.*//*TODO test putting a class on HEAD.- Fails on FF. */body,div,d      l,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td {margin:0;padding:0;}table {border-collapse:colla      pse;border-spacing:0;}fieldset,img {border:0;}/*TODO think about han      lding inheritence differently, maybe letting IE6 fail a bit...*/address,caption,cite,code,dfn,em,strong,th,var {font-style:normal;font-weight:norma   l;} ol,ul {list-style:none;} caption,th {text-align:left;}h1,h2,h3,   h4,h5,h6 {font-size:100%;font-weight:normal;}q:before,q:after {conte      nt:'';}abbr,acronym {border:0;font-variant:normal;}/* to preserve lin   e-height and selector appearance */sup {vertical-align:text-top;}sub {    vertical-align:text-bottom;}input,textarea,select {font-family:inheri t;font-size:inherit;font-weight:inherit;}/*to enable resizing for IE*   /input,textarea,select {*font-size:100%;}/*because legend doesn't inhe  rit in IE */legend {color:#000;}/* YUI CSS Detection Stamp */#yui3-css  -stamp.cssreset { display: none; }
 
+
 @import "bourbon/bourbon"
+
+// Override neat settings
+
+$gutter: golden-ratio(2em, 1) !global
+$max-width: 100% !global
+$visual-grid: true !global
+$column: golden-ratio(1em, 3) !global
+
 @import "neat/neat"
 
-$visual-grid: true !global
-//$column: golden-ratio(1em, 3) !global
-//$max-width: 100% !global
+
+
 
 //----- VARIABLES -----//
 
@@ -22,10 +30,10 @@ $black: #000000
 $mint: #8FBFB3
 $red: #CD4836
 
+
+
 //----- MIXINS -----//
 
-@mixin bottom-margin( $mult )
-  margin-bottom: $mult * $gutter
 
 
 //----- PLACEHOLDERS -----//
@@ -54,23 +62,27 @@ $red: #CD4836
 %sans-heading
   font-family: $openSans
   font-weight: 800
-  line-height: 66px
   text-transform: uppercase
 
 %small-heading
   @extend %sans-heading
+  margin-bottom: 10px
   font-size: 19px
+  line-height: 19px
   color: $red
 
 %medium-heading
   @extend %sans-heading
   color: $brown
   font-size: 36px
+  line-height: 66px
 
 %large-heading
   @extend %sans-heading
   color: $brown
   font-size: 64px
+  line-height: 66px
+
 
 
 //----- MAIN -----//
@@ -82,28 +94,26 @@ body
 
 .content
 
-
-//----- HEADER -----//
-
-.header
-  @include outer-container
-  @include bottom-margin(2)
-  background-color: $beige
-
-
 .borg-bar
-  @include bottom-margin(6)
   width: 100%
   height: 100px
   background-color: $brown
 
 
+
+//----- HEADER -----//
+
+.header
+  @include outer-container
+  padding: $column*2 0 $gutter*2
+  background-color: $beige
+
 .article
   @include outer-container
-
+  padding: $column 0 $gutter
 
 .heading--cursive
-  @include bottom-margin(1)
+  margin-bottom: 30px
   text-align: center
   font-family: $satisfy
   font-size: 24px
@@ -111,14 +121,18 @@ body
   line-height: 28px
 
 .heading--names
-  @include bottom-margin(0.2)
+  margin-bottom: 10px
   @extend %large-heading
   text-align: center
 
 .heading--unite
-  @include bottom-margin(2)
   @extend %medium-heading
   text-align: center
+  &:before, &:after
+    content: url('img/x-pattern.png')
+    vertical-align: text-bottom
+    padding: 0 20px
+
 
 
 //----- ARTICLE -----//
@@ -131,40 +145,44 @@ body
 
 
 .main__header
-  @include bottom-margin(2)
+  margin-bottom: 10px
 
 
 .main__heading--date
   @extend %large-heading
-  @include bottom-margin(0.2)
+  margin-bottom: 50px
   font-size: 144px
   line-height: 130px
   text-align: center
 
 .main__heading--place
-  @include bottom-margin(0.5)
   @extend %large-heading
   @extend %link
+  margin-bottom: 30px
   color: $mint
   text-align: center
 
 .main__heading--address
   @extend %small-heading
-  @include span-columns(5)
-  overflow: auto
+  @include span-columns(4)
   float: none
-  margin: auto !important
+  margin: 0 auto $column auto !important
+  padding: 20px
+  overflow: auto
   color: $mint
-  border: solid 2px $mint
+  border: solid 3px $mint
   text-align: center
 
 
 .main__content--wrap
   @include span-columns(4)
+  //@include omega
   @include shift(2)
+  margin-bottom: $column
   &:last-child
     @include shift(0)
-
+    padding-left: $gutter
+    border-left: 3px solid $beige
 
 .main__content__heading
   @extend %small-heading
@@ -173,12 +191,21 @@ body
 .main__content__text
   @extend %body-text
 
+
+
 //----- TRANSPORTATION -----//
 
-.article__transportatation
+.article__transportation
+  @include outer-container
+  background-color: $brown
+  padding: $column 0 $column 0
 
 
 .transportation__content--wrap
+  @include span-columns(2.75)
+  @include shift(0)
+  &:first-of-type
+    @include shift(2)
 
 
 .transportation__content__heading
@@ -188,21 +215,39 @@ body
 .transportation__content__text
   @extend %body-text-light
 
+
+
 //----- MAP -----//
 
 .map--container
+  pointer-events: none
+  margin: 0 0 $column 0
+  iframe
+    border: none !important
+
 
 
 //----- FAQ -----//
 
 .article__faq
+  @include outer-container
+  margin-bottom: $column
 
 
 .faq__heading
   @extend %large-heading
+  margin-bottom: 1em
+  font-size: 144px
+  line-height: 130px
+  text-align: center
 
 
 .faq__content--wrap
+  @include span-columns(8)
+  @include shift(2)
+  padding-bottom: $column
+  border-bottom: 3px solid $beige
+  margin-bottom: $column
 
 
 .faq__content__heading
@@ -213,23 +258,40 @@ body
   @extend %body-text
 
 
+
 //----- FOOTER -----//
 
 .footer
-
+  background-color: $brown
+  padding: $column 0 0
 
 .footer__quote
   font-family: $satisfy
   font-size: 24px
   color: $beige
   line-height: 28px
+  text-align: center
+  margin-bottom: 30px
 
 
 .footer--heading
   @extend %small-heading
+  text-align: center
+  margin-bottom: $gutter
 
 
 .footer__subfooter
+  width: 100%
+  padding: $gutter/2 0
+  background-color: $red
 
-
-
+.subfooter__text
+  @extend %small-heading
+  margin-bottom: 0
+  color: $brown
+  text-align: center
+  a
+    color: $brown
+    &:hover
+      color: $beige
+    &:visited
