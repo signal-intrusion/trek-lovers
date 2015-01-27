@@ -98,6 +98,7 @@ body
   width: 100%
   height: 100px
   background-color: $brown
+  background: $brown url('img/borg.jpg') repeat-x
 
 
 
@@ -121,8 +122,8 @@ body
   line-height: 28px
 
 .heading--names
-  margin-bottom: 10px
   @extend %large-heading
+  margin-bottom: 10px
   text-align: center
 
 .heading--unite
@@ -272,6 +273,14 @@ body
   line-height: 28px
   text-align: center
   margin-bottom: 30px
+  &:before
+    content: ""
+    position: relative
+    display: block
+    width: 70px
+    height: 100px
+    margin: 0 auto 1em
+    background: url("img/klingon-footer_2X.png") top left / contain no-repeat
 
 
 .footer--heading
