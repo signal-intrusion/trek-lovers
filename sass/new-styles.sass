@@ -9,7 +9,7 @@
 
 $gutter: golden-ratio(2em, 1) !global
 $max-width: 100% !global
-$visual-grid: true !global
+//$visual-grid: true !global
 $column: golden-ratio(1em, 3) !global
 
 @import "neat/neat"
@@ -41,8 +41,10 @@ $red: #CD4836
 %body-text
   font-family: $sanchez
   color: $brown
-  font-size: 17px
-  line-height: 28px
+  font-size: 18px
+  line-height: 30px
+  a
+    @extend %link
 
 %body-text-light
   font-family: $sanchez
@@ -67,7 +69,7 @@ $red: #CD4836
 %small-heading
   @extend %sans-heading
   margin-bottom: 10px
-  font-size: 19px
+  font-size: 15px
   line-height: 19px
   color: $red
 
@@ -91,6 +93,22 @@ body
   width: 100%
   height: 100%
 
+.trek-img
+  width: 300px
+  height: auto
+  &.is-right
+    float: right
+    margin-left: $gutter
+  &.is-left
+    float: left
+  &.is-bashir
+    position: absolute
+    top: -64px
+  &.is-worf
+    position: absolute
+    bottom: -120px
+    right: 0
+
 
 .content
 
@@ -99,6 +117,31 @@ body
   height: 100px
   background-color: $brown
   background: $brown url('img/borg.jpg') repeat-x
+  &:after
+    content: ""
+    position: relative
+    display: block
+    width: 90px
+    height: 100px
+    margin: -14px auto
+    background: url("img/klingon-header_2X.png") top left / contain no-repeat
+  a
+    @extend %link
+
+
+.borg-bar__heading--left
+  @extend %small-heading
+  float: left
+  font-size: 13px
+  padding: 40px 0 0 35px
+  color: $beige
+
+.borg-bar__heading--right
+  @extend %small-heading
+  text-align: right
+  font-size: 13px
+  padding: 40px 35px 0 0
+  color: $beige
 
 
 
@@ -106,7 +149,7 @@ body
 
 .header
   @include outer-container
-  padding: $column*2 0 $gutter*2
+  padding: $column*1.5 0 $gutter*2
   background-color: $beige
 
 .article
@@ -140,14 +183,20 @@ body
 
 .article
 
-
 .article__main
+  position: relative
   overflow: auto
-
+  &:after
+    content: ""
+    position: absolute
+    bottom: 0
+    display: block
+    width: 100%
+    height: 107px
+    background: url("img/the-gang.jpg") center/cover no-repeat
 
 .main__header
   margin-bottom: 10px
-
 
 .main__heading--date
   @extend %large-heading
@@ -158,10 +207,12 @@ body
 
 .main__heading--place
   @extend %large-heading
-  @extend %link
   margin-bottom: 30px
   color: $mint
   text-align: center
+
+.main__heading--link
+  @extend %link
 
 .main__heading--address
   @extend %small-heading
@@ -174,12 +225,11 @@ body
   border: solid 3px $mint
   text-align: center
 
-
 .main__content--wrap
   @include span-columns(4)
   //@include omega
   @include shift(2)
-  margin-bottom: $column
+  margin-bottom: $column*2 + $gutter
   &:last-child
     @include shift(0)
     padding-left: $gutter
@@ -188,10 +238,8 @@ body
 .main__content__heading
   @extend %small-heading
 
-
 .main__content__text
   @extend %body-text
-
 
 
 //----- TRANSPORTATION -----//
@@ -201,17 +249,13 @@ body
   background-color: $brown
   padding: $column 0 $column 0
 
-
 .transportation__content--wrap
   @include span-columns(2.75)
   @include shift(0)
   &:first-of-type
     @include shift(2)
-
-
 .transportation__content__heading
   @extend %small-heading
-
 
 .transportation__content__text
   @extend %body-text-light
@@ -221,8 +265,10 @@ body
 //----- MAP -----//
 
 .map--container
+  position: relative
+  z-index: -1
+  margin: -42px 0 $column 0
   pointer-events: none
-  margin: 0 0 $column 0
   iframe
     border: none !important
 
@@ -232,6 +278,7 @@ body
 
 .article__faq
   @include outer-container
+  position: relative
   margin-bottom: $column
 
 
@@ -263,7 +310,7 @@ body
 //----- FOOTER -----//
 
 .footer
-  background-color: $brown
+  background: $brown url('img/borg.jpg') repeat
   padding: $column 0 0
 
 .footer__quote
