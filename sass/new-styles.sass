@@ -4,6 +4,7 @@
 
 
 @import "bourbon/bourbon"
+@import "neat/neat-helpers"
 
 // Override neat settings
 
@@ -12,8 +13,13 @@ $max-width: 100% !global
 //$visual-grid: true !global
 $column: golden-ratio(1em, 3) !global
 
-@import "neat/neat"
+// Breakpoints
+$sm: new-breakpoint(max-width 500px 4)
+$md: new-breakpoint(max-width 800px 8)
+$lg: new-breakpoint(max-width 1100px 12)
+$xl: new-breakpoint(min-width 1101px 12)
 
+@import "neat/neat"
 
 
 
@@ -60,7 +66,6 @@ $red: #CD4836
   &:hover
     color: $red
 
-
 %sans-heading
   font-family: $openSans
   font-weight: 800
@@ -84,6 +89,8 @@ $red: #CD4836
   color: $brown
   font-size: 64px
   line-height: 66px
+  @include media($md)
+    font-size: 54px
 
 
 
@@ -99,32 +106,52 @@ body
   &.is-right
     float: right
     margin-left: $gutter
+    @include media($md)
+      width: 100%
+      margin-bottom: $gutter
   &.is-left
     float: left
   &.is-bashir
     position: absolute
     top: -64px
+    @include media($md)
+      display: none
   &.is-worf
     position: absolute
     right: 0
     bottom: -120px
+    @include media($md)
+      width: 200px
   &.is-spock
     position: absolute
     right: 0
     width: 150px
+    @include media($md)
+      width: 100px
   &.is-klingons
     position: absolute
     width: 180px
     left: $column
-
-
-.content
+    @include media($md)
+      left: 0
+  &.is-q
+    position: absolute
+    width: 300px
+    bottom: 0
+    @include media($lg)
+      width: 200px
+    @include media($md)
+      width: 150px
+      bottom: 106px
 
 .borg-bar
   width: 100%
   height: 100px
   background-color: $brown
-  background: $brown url('img/borg.jpg') repeat-x
+  background: $brown url('img/borg.jpg') repeat
+  @include media($md)
+    height: auto
+    padding-top: 10px
   &:after
     content: ""
     position: relative
@@ -133,6 +160,9 @@ body
     height: 100px
     margin: -14px auto
     background: url("img/klingon-header_2X.png") top left / contain no-repeat
+    @include media($md)
+      top: 28px
+      margin: -34px auto
   a
     @extend %link
 
@@ -143,6 +173,13 @@ body
   font-size: 13px
   padding: 40px 0 0 35px
   color: $beige
+  @include media($lg)
+  @include media($md)
+    float: none
+    padding: 10px 0 5px
+    text-align: center
+    margin-bottom: 10px
+  @include media($sm)
 
 .borg-bar__heading--right
   @extend %small-heading
@@ -150,6 +187,10 @@ body
   font-size: 13px
   padding: 40px 35px 0 0
   color: $beige
+  @include media($md)
+    float: none
+    padding: 10px 0
+    text-align: center
 
 
 
@@ -159,10 +200,10 @@ body
   @include outer-container
   padding: $column*1.5 0 $gutter*2
   background-color: $beige
-
-.article
-  @include outer-container
-  padding: $column 0 $gutter
+  @include media($md)
+    padding: $column $column $column
+  @include media($sm)
+    padding: $column 0 $column
 
 .heading--cursive
   margin-bottom: 30px
@@ -190,6 +231,10 @@ body
 //----- ARTICLE -----//
 
 .article
+  @include outer-container
+  padding: $column 0 $gutter
+  @include media($md)
+    padding: $column*1.5 0 $gutter
 
 .article__main
   position: relative
@@ -212,12 +257,18 @@ body
   font-size: 144px
   line-height: 130px
   text-align: center
+  @include media($md)
+    font-size: 80px
+    margin-bottom: 10px
 
 .main__heading--place
   @extend %large-heading
   margin-bottom: 30px
   color: $mint
   text-align: center
+  @include media($md)
+    position: relative
+    z-index: 2
 
 .main__heading--link
   @extend %link
@@ -229,19 +280,44 @@ body
   margin: 0 auto $column auto !important
   padding: 20px
   overflow: auto
-  color: $mint
   border: solid 3px $mint
+  color: $mint
   text-align: center
+  line-height: 1.8
+  @include media($md)
+    width: $column*3
+    position: relative
+    z-index: 2
+    background-color: $white
 
 .main__content--wrap
   @include span-columns(4)
-  //@include omega
   @include shift(2)
   margin-bottom: $column*2 + $gutter
   &:last-child
     @include shift(0)
     padding-left: $gutter
     border-left: 3px solid $beige
+  @include media($lg)
+    @include shift(1)
+    @include span-columns(5)
+  @include media($md)
+    @include span-columns(6)
+    @include shift(1)
+    margin-bottom: $gutter
+    &:last-child
+      @include shift(1)
+      border: none
+      padding: 0
+      margin-bottom: $column*2
+  @include media($sm)
+    @include span-columns(3)
+    float: none
+    margin: 0 auto $gutter
+    &:last-child
+      border: none
+      padding: 0
+      margin: 0 auto $gutter * 2
 
 .main__content__heading
   @extend %small-heading
@@ -254,14 +330,28 @@ body
 
 .article__transportation
   @include outer-container
-  background-color: $brown
+  position: relative
+  z-index: 1
   padding: $column 0 $column 0
+  background-color: $brown
 
 .transportation__content--wrap
   @include span-columns(2.75)
   @include shift(0)
   &:first-of-type
     @include shift(2)
+  @include media($lg)
+    @include span-columns(3.25)
+    &:first-of-type
+      @include shift(1)
+  @include media($md)
+    @include span-columns(6)
+    @include shift(1)
+    margin-bottom: $gutter/2
+    &:first-of-type
+      @include shift(1)
+  @include media($sm)
+
 .transportation__content__heading
   @extend %small-heading
 
@@ -273,12 +363,16 @@ body
 //----- MAP -----//
 
 .map--container
-  position: relative
-  z-index: -1
   margin: -42px 0 $column 0
-  pointer-events: none
+  cursor: pointer
   iframe
     border: none !important
+  @include media($md)
+    margin-bottom: $gutter
+
+.map--iframe
+  &.is-disabled
+    pointer-events: none
 
 
 
@@ -296,6 +390,9 @@ body
   font-size: 144px
   line-height: 130px
   text-align: center
+  @include media($md)
+    font-size: 54px
+    line-height: 1
 
 
 .faq__content--wrap
@@ -304,6 +401,9 @@ body
   padding-bottom: $column
   border-bottom: 3px solid $beige
   margin-bottom: $column
+  @include media($md)
+    margin-bottom: $gutter
+    padding-bottom: $gutter
 
 
 .faq__content__heading
@@ -318,8 +418,11 @@ body
 //----- FOOTER -----//
 
 .footer
-  background: $brown url('img/borg.jpg') repeat
+  position: relative
   padding: $column 0 0
+  background: $brown url('img/borg.jpg') repeat
+  @include media($md)
+    padding-top: $gutter
 
 .footer__quote
   font-family: $satisfy
@@ -336,6 +439,11 @@ body
     height: 100px
     margin: 0 auto 1em
     background: url("img/klingon-footer_2X.png") top left / contain no-repeat
+  @include media($md)
+    width: $column*4
+    margin: 0 auto 10px
+  @include media($sm)
+    width: $column*3
 
 
 .footer--heading
@@ -354,8 +462,14 @@ body
   margin-bottom: 0
   color: $brown
   text-align: center
+  line-height: 1.5
   a
     color: $brown
     &:hover
       color: $beige
     &:visited
+  @include media($md)
+    width: $column*6
+    margin: 0 auto 10px
+  @include media($sm)
+    width: $column*5
