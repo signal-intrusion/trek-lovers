@@ -11,3 +11,4 @@ boubon/
 neat/
 *.scss
 !styleguide.css
+*.map
