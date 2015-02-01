@@ -48,15 +48,20 @@ $red: #CD4836
   font-family: $sanchez
   color: $brown
   font-size: 18px
-  line-height: 34px
+  line-height: 1.9
+  @include media($sm)
+    font-size: 16px
   a
     @extend %link
+
 
 %body-text-light
   font-family: $sanchez
   color: $white
   font-size: 17px
-  line-height: 28px
+  line-height: 1.8
+  @include media($sm)
+    font-size: 16px
 
 %link
   color: $mint
@@ -133,7 +138,8 @@ body
     width: 180px
     left: $column
     @include media($md)
-      left: 0
+      left: 50%
+      margin-left: -90px
   &.is-q
     position: absolute
     width: 300px
